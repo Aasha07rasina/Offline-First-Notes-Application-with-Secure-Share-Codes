@@ -2,8 +2,12 @@ const mongoose = require('mongoose');
 
 const SnapshotSchema = new mongoose.Schema({
   shareCode: { type: String, required: true, unique: true },
-  payload: { type: Array, required: true }, // The list of notes from your friend
-  createdAt: { type: Date, default: Date.now, expires: '24h' } // Auto-delete after 24 hours
+  notesPayload: { type: Array, required: true }, 
+  createdAt: { 
+    type: Date, 
+    default: Date.now, 
+    expires: 86400 // Mandatory: Auto-deletes after 24 hours [cite: 37, 54]
+  }
 });
 
 module.exports = mongoose.model('Snapshot', SnapshotSchema);

@@ -1,15 +1,15 @@
-const { nanoid } = require('nanoid');
+const { generateShareCode } = require('../utils/generateCode');
 const Snapshot = require('../models/Snapshot');
 
 // 1. Create a share code for a bundle of notes
 exports.createShareCode = async (req, res) => {
   try {
     const { notes } = req.body;
-    const code = nanoid(6).toUpperCase(); // Generates a short 6-character code
+    const code = generateShareCode(); // Generates a short 6-character code
 
     const newSnapshot = new Snapshot({
       shareCode: code,
-      payload: notes
+      notesPayload: notes
     });
 
     await newSnapshot.save();
