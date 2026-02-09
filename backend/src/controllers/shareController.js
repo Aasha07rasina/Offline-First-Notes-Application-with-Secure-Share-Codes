@@ -4,6 +4,9 @@ const Snapshot = require('../models/Snapshot');
 // 1. Create a share code for a bundle of notes
 exports.createShareCode = async (req, res) => {
   try {
+    console.log("REQ BODY:", req.body);   // 👈 ADD
+    console.log("NOTES FIELD:", req.body.notes); // 👈 ADD
+
     const { notes } = req.body;
     const code = generateShareCode(); // Generates a short 6-character code
 
@@ -31,7 +34,7 @@ exports.getNotesByCode = async (req, res) => {
       return res.status(404).json({ error: "Code invalid or expired" });
     }
 
-    res.json(snapshot.payload);
+    res.json(snapshot.notesPayload);
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }
