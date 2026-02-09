@@ -7,4 +7,5 @@ const { validateNotes } = require('../middleware/validate'); // Matches the { } 
 router.post('/share', validateNotes, shareController.createShareCode);
 router.get('/share/:code', shareController.getNotesByCode);
 
+
 module.exports = router;
