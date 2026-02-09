@@ -12,8 +12,9 @@ export default function NotesList({
             onChange={(e) =>
               updateNote({
                 ...note,
+                title: e.target.value.slice(0, 20), 
                 content: e.target.value,
-                updatedAt: Date.now(),
+                updatedAt:new Date().toISOString(),
               })
             }
           />

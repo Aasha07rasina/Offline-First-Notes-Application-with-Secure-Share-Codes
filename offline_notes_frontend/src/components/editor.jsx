@@ -9,9 +9,10 @@ export default function Editor({ addNote }) {
 
     const newNote = {
       id: uuid(),
+      title: text.slice(0, 20), 
       content: text,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
+      createdAt: new Date().toISOString(),
+      updatedAt:new Date().toISOString(),
     };
 
     addNote(newNote);

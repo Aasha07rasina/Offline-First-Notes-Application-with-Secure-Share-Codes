@@ -15,13 +15,14 @@ export default function App() {
   const online = useNetwork();
 
   async function handleShare() {
+    console.log("Notes being sent:", notes); 
     if (!online) {
       alert("You are offline");
       return;
     }
 
     const res = await createShare(notes);
-    alert("Share code: " + res.code);
+    alert("Share code: " + res.shareCode);
   }
 
   return (
