@@ -3,6 +3,7 @@ import useNetwork from "./hooks/useNetwork";
 import Editor from "./components/editor";
 import NotesList from "./components/notesList";
 import { createShare } from "./services/shareApi";
+import ImportBox from "./components/ImportBox";
 
 export default function App() {
   const {
@@ -10,6 +11,8 @@ export default function App() {
     addNote,
     updateNote,
     removeNote,
+    replaceAllNotes,
+    mergeNotes,
   } = useNotes();
 
   const online = useNetwork();
@@ -36,6 +39,11 @@ export default function App() {
       <button onClick={handleShare}>
         Share Notes
       </button>
+
+      <ImportBox
+        replaceAllNotes={replaceAllNotes}
+        mergeNotes={mergeNotes}
+      />
 
       <NotesList
         notes={notes}
