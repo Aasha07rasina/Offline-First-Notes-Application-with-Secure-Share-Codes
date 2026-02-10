@@ -50,12 +50,39 @@ export default function useNotes() {
     loadNotes();
   }
 
+  async function mergeNotes(importedNotes) {
+  const existing = await getAllNotes();
+
+  const existingIds = new Set(existing.map(n => n.id));
+
+  const merged = [...existing];
+
+  for (let note of importedNotes) {
+    if (!existingIds.has(note.id)) {
+      merged.push(note);
+      await saveNote(note);
+    } else {
+      // duplicate ID → create new one
+      const newNote = {
+        ...note,
+        id: crypto.randomUUID(),
+      };
+      merged.push(newNote);
+      await saveNote(newNote);
+    }
+  }
+
+  setNotes(merged);
+}
+
+
   return {
     notes,
     addNote,
     updateNote,
     removeNote,
     replaceAllNotes,
+    mergeNotes,
     loadNotes,
   };
 }

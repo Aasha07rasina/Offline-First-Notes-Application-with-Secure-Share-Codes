@@ -3,7 +3,12 @@ import useNotes from "./hooks/useNotes";
 import useNetwork from "./hooks/useNetwork";
 import Editor from "./components/editor";
 import NotesList from "./components/notesList";
+<<<<<<< HEAD
 import { createShare, importShare } from "./services/shareApi"; // Added importShare
+=======
+import { createShare } from "./services/shareApi";
+import ImportBox from "./components/ImportBox";
+>>>>>>> 4d5682dfdd551d661ba6bc5e8501eb7da8a04a0d
 
 export default function App() {
   const {
@@ -11,7 +16,12 @@ export default function App() {
     addNote,
     updateNote,
     removeNote,
+<<<<<<< HEAD
     setNotes, // Ensure your useNotes hook provides a way to update the full list
+=======
+    replaceAllNotes,
+    mergeNotes,
+>>>>>>> 4d5682dfdd551d661ba6bc5e8501eb7da8a04a0d
   } = useNotes();
 
   const [importCode, setImportCode] = useState(""); // State for the text box
@@ -99,6 +109,11 @@ export default function App() {
           </button>
         </div>
       </div>
+
+      <ImportBox
+        replaceAllNotes={replaceAllNotes}
+        mergeNotes={mergeNotes}
+      />
 
       <NotesList
         notes={notes}
