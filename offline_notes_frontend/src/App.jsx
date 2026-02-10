@@ -21,14 +21,14 @@ export default function App() {
   const online = useNetwork();
 
   async function handleShare() {
-    console.log("Notes being sent:", notes); 
+    
     if (!online) {
       alert("You are offline");
       return;
     }
 
     try {
-      const res = await createShare(notes);
+      const res = await createShare([note]);
       alert("Share code: " + res.shareCode);
     } catch (err) {
       alert("Share failed: " + err.message);
@@ -54,18 +54,25 @@ export default function App() {
       const confirmReplace = window.confirm("Replace current notes? (Cancel to Merge)");
 
       if (confirmReplace) {
-        if (setNotes) setNotes(sharedNotes);
+        await replaceAllNotes(sharedNotes);
+        alert("Notes replaced successfully");
       } else {
         // Simple merge: add each shared note to the current list
-        sharedNotes.forEach(note => addNote(note));
-      }
+        await mergeNotes(sharedNotes);
+        alert("Notes merged successfully");
+    }
+      
 
-      alert("Notes imported successfully!");
+      
       setImportCode(""); // Clear the box
     } catch (err) {
       alert("Import Error: " + err.message);
     }
   }
+
+
+
+
 
   return (
     <div style={{ padding: "20px", maxWidth: "600px", margin: "0 auto" }}>
@@ -112,6 +119,7 @@ export default function App() {
         notes={notes}
         updateNote={updateNote}
         removeNote={removeNote}
+        onShareNote={handleShare}
       />
     </div>
   );
