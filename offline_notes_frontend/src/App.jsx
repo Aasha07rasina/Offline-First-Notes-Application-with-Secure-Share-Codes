@@ -4,6 +4,7 @@ import useNetwork from "./hooks/useNetwork";
 import Editor from "./components/editor";
 import NotesList from "./components/notesList";
 import { createShare, importShare } from "./services/shareApi"; // Added importShare
+import ImportBox from "./components/ImportBox";
 
 export default function App() {
   const {
@@ -11,6 +12,8 @@ export default function App() {
     addNote,
     updateNote,
     removeNote,
+    replaceAllNotes,
+    mergeNotes,
     setNotes, // Ensure your useNotes hook provides a way to update the full list
   } = useNotes();
 

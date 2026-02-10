@@ -39,15 +39,7 @@ export default function ImportBox({ replaceAllNotes, mergeNotes }) {
 
   return (
     <div>
-      <input
-        placeholder="Enter share code"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-      />
-
-      <button onClick={handleImportClick}>
-        Import Notes
-      </button>
+    
 
       <MergeReplaceModal
         visible={showModal}
